@@ -1,0 +1,194 @@
+<div class="row">
+  <div class="col-6">
+    <fieldset>
+      <h2>Entradas</h2>
+      <hr />
+      <div class="row">
+        <div class="col-2">
+          <div class="text-center">
+            <label>IN 1 &nbsp;</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': inputs.in1, 'btn-danger': !inputs.in1}"
+              disabled>
+              {{inputs.in1}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>IN 2 &nbsp;</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': inputs.in2, 'btn-danger': !inputs.in2}"
+              disabled>
+              {{inputs.in2}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>IN 3 &nbsp;</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': inputs.in3, 'btn-danger': !inputs.in3}"
+              disabled>
+              {{inputs.in3}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>IN 4 &nbsp;</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': inputs.in4, 'btn-danger': !inputs.in4}"
+              disabled>
+              {{inputs.in4}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>IN 5 &nbsp;</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': inputs.in5, 'btn-danger': !inputs.in5}"
+              disabled>
+              {{inputs.in5}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h2>PWM 1</h2>
+      <hr />
+      <label>Potência</label>
+      <div class="input-group">
+        <input type="number" class="form-control" readonly [(ngModel)]="pwm1.potencia">
+        <div class="input-group-append">
+          <span class="input-group-text">%</span>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h2>Mensagem de Entrada</h2>
+      <hr />
+      <div class="form-group">
+        <label>Interface</label>
+        <input type="text" class="form-control" [(ngModel)]="lastEventIn.nome" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Mensagem</label>
+        <input type="text" class="form-control" [(ngModel)]="lastEventIn.msg" readonly>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h2>Mensagem de Saída</h2>
+      <hr />
+      <div class="form-group">
+        <label>Interface</label>
+        <input type="text" class="form-control" [(ngModel)]="lastEventOut.nome" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Mensagem</label>
+        <input type="text" class="form-control" [(ngModel)]="lastEventOut.msg" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Cor</label>
+        <input type="text" class="form-control" [(ngModel)]="lastEventOut.cor" readonly>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="col-6">
+    <fieldset>
+      <h2>Saidas</h2>
+      <hr />
+      <div class="row">
+        <div class="col-2">
+          <div class="text-center">
+            <label>OUT 1</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': outputs.out1, 'btn-danger': !outputs.out1}"
+              disabled>
+              {{outputs.out1}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>OUT 2</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': outputs.out2, 'btn-danger': !outputs.out2}"
+              disabled>
+              {{outputs.out2}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>OUT 3</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': outputs.out3, 'btn-danger': !outputs.out3}"
+              (click)="outputs.out3 = outputs.out3 > 0 ? 0 : 1">
+              {{outputs.out3}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>OUT 4</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': outputs.out4, 'btn-danger': !outputs.out4}"
+              (click)="outputs.out4 = outputs.out4  > 0 ? 0 : 1">
+              {{outputs.out4}}
+            </button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="text-center">
+            <label>OUT 5</label>
+            <button type="button" class="btn" [ngClass]="{'btn-success': outputs.out5, 'btn-danger': !outputs.out5}"
+              (click)="outputs.out5 = outputs.out5 > 0 ? 0 : 1">
+              {{outputs.out5}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h2>PWM 2 (manual)</h2>
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <label>Potência</label>
+          <div class="input-group">
+            <input type="number" class="form-control" [(ngModel)]="pwm2.potencia">
+            <div class="input-group-append">
+              <span class="input-group-text">%</span>
+              <button class="btn btn-success" type="button" (click)="sendPWM(pwm2)"
+                [disabled]="pwm2.potencia === null || pwm2.potencia > 100">
+                Enviar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h2>Eventos Registrados</h2>
+      <hr />
+      <div class="text-center" *ngIf="!events">
+        Nenhum evento registrado até o momento
+      </div>
+      <div *ngIf="events">
+        <div class="alert alert-secondary" role="alert" *ngFor="let event of events">
+          <strong>{{event.dataHoraEvento | date:'dd/MM/yyyy HH:mm:ss'}}</strong>
+          <hr>
+          <div style="padding-left: 30px">
+            <strong>Evento</strong>: {{event.nome}}
+          </div>
+          <div style="padding-left: 30px">
+            <strong>Mensagem</strong>: {{event.msg}}
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>
